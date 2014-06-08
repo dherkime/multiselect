@@ -30,3 +30,4 @@ Driving around
 --------------
 Pull down the list.   Check items using the checkboxes.  Select items by clicking on their name.  Move selected items
 up and down by clokcing the Up/Down buttons.
+![ScreenShot](/PulldownExample.png)
