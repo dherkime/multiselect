@@ -31,6 +31,13 @@
  * --------------------------------------------------------------------------------
  */
 
+/**
+ * @ngdoc directive
+ * @name multi-select.directive:multiSelect
+ * @description
+ * # multi-select
+ * Creates a dropdown-like button with checkboxes, all/none/reset buttons, a filter, and up/down buttons
+ */
 angular.module('multi-select', ['ng']).directive('multiSelect', [ '$sce', '$filter', function ($sce, $filter) {
   return {
     restrict: 'AE',
@@ -391,36 +398,43 @@ angular.module('multi-select', ['ng']).directive('multiSelect', [ '$sce', '$filt
       }
 
 
-      //doherk
+      /**
+       * Changes (adds or removes) a CSS style on the selected item to indicate
+       * that the user has selected/deselected the item with a mouse-click.
+       * @param item
+       * @param e
+       */
       $scope.toggleHighlight = function (item, e) {
         var cssStyleDeclaration = e.target.style;
         if (cssStyleDeclaration.getPropertyValue('background-color')) {
           cssStyleDeclaration.removeProperty('background-color');
-          console.log("unhighlight=" + item.name);
           _.remove($scope.highlightedItems, function (i) {
             return i.name === item.name;
           });
         } else {
           cssStyleDeclaration.setProperty('background-color', '#ffff99');
-          console.log("highlight=" + item.name);
           $scope.highlightedItems.push(item);
         }
       }
 
+      /**
+       * Moves the selected item(s) up in the inputModel.
+       * @param e the click event on an item.
+       */
       $scope.moveUp = function (e) {
         _($scope.highlightedItems).forEach(function (item) {
-          console.log("moving " + item.name + " up");
           $scope.inputModel.moveUp(item);
         });
-        console.log("moved up");
       }
 
+      /**
+       * Moves the selected item(s) down in the inputModel.
+       * @param e the click event on an item.
+       */
       $scope.moveDown = function (e) {
         _($scope.highlightedItems).forEach(function (item) {
-          console.log("moving " + item.name + " down");
           $scope.inputModel.moveDown(item);
         });
-        console.log("moved down");
       }
 
 
